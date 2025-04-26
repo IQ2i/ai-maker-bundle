@@ -1,0 +1,34 @@
+{
+    "name": "iq2i/ai-maker-bundle",
+    "type": "symfony-bundle",
+    "homepage": "https://github.com/IQ2i/ai-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Loïc Sapone",
+            "email": "loic@sapone.fr",
+            "homepage": "https://loic-sapone.fr"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "symfony/framework-bundle": "^6.4 || ^7.0",
+        "symfony/http-client": "^6.4 || ^7.0"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.1",
+        "rector/rector": "^2.0.12",
+        "friendsofphp/php-cs-fixer": "^3.75"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": { "IQ2i\\AiMakerBundle\\": "src" }
+    },
+    "autoload-dev": {
+        "psr-4": { "IQ2i\\AiMakerBundle\\Tests\\": "tests" }
+    }
+}

@@ -1,0 +1,6 @@
+services:
+    php:
+        build: docker/php/
+        working_dir: /srv/app
+        volumes:
+            - ./:/srv/app:rw,cached

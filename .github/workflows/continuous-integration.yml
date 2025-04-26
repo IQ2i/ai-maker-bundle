@@ -1,0 +1,95 @@
+name: "Continuous Integration"
+
+on:
+  push:
+    branches:
+      - 0.x
+  pull_request:
+    branches:
+      - 0.x
+
+jobs:
+  php-cs-fixer:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+
+      - name: PHP-CS-Fixer
+        run: PHP_CS_FIXER_IGNORE_ENV=1 php vendor/bin/php-cs-fixer fix --dry-run --diff --no-ansi
+
+  phpstan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+
+      - name: PHPStan
+        run: php vendor/bin/phpstan analyse
+
+  rector:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.4
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+
+      - name: RectorPHP
+        run: php vendor/bin/rector process --dry-run
+
+  phpunit:
+    strategy:
+      matrix:
+        operating-system: [ 'ubuntu-latest' ]
+        php-version: [ '8.3', '8.4' ]
+
+    runs-on: ${{ matrix.operating-system }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_version }}
+          coverage: none
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependencies }}
+
+      - name: Test PHPUnit
+        run: php vendor/bin/phpunit
