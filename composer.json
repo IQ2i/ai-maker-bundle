@@ -1,7 +1,9 @@
 {
     "name": "iq2i/ai-maker-bundle",
     "type": "symfony-bundle",
-    "homepage": "https://github.com/IQ2i/ai-bundle",
+    "description": "Maker bundle boosted by AI",
+    "keywords": ["ai", "generator", "code generator", "dev", "mistral"],
+    "homepage": "https://github.com/IQ2i/ai-maker-bundle",
     "license": "MIT",
     "authors": [
         {
