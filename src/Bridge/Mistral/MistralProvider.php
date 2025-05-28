@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\AiMakerBundle\Bridge\MistralAI;
+namespace IQ2i\AiMakerBundle\Bridge\Mistral;
 
 use IQ2i\AiMakerBundle\Exception\ProviderException;
 use IQ2i\AiMakerBundle\Exception\RuntimeException;
@@ -23,7 +23,7 @@ use IQ2i\AiMakerBundle\Response\ResponseInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-readonly class MistralAIProvider implements ProviderInterface
+readonly class MistralProvider implements ProviderInterface
 {
     public function __construct(
         private HttpClientInterface $client,
@@ -65,7 +65,7 @@ readonly class MistralAIProvider implements ProviderInterface
 
     public function __toString(): string
     {
-        return \sprintf('mistralai://%s', $this->endpoint);
+        return \sprintf('mistral://%s', $this->endpoint);
     }
 
     private function convertChoice(array $choice): Choice

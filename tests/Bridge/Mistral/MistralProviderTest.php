@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\AiMakerBundle\Tests\Bridge\MistralAI;
+namespace IQ2i\AiMakerBundle\Tests\Bridge\Mistral;
 
-use IQ2i\AiMakerBundle\Bridge\MistralAI\MistralAIProvider;
+use IQ2i\AiMakerBundle\Bridge\Mistral\MistralProvider;
 use IQ2i\AiMakerBundle\Message\MessageBag;
 use IQ2i\AiMakerBundle\Provider\ProviderInterface;
 use IQ2i\AiMakerBundle\Test\AbstractProviderTestCase;
@@ -22,11 +22,11 @@ use Symfony\Component\HttpClient\Response\JsonMockResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
-class MistralAIProviderTest extends AbstractProviderTestCase
+class MistralProviderTest extends AbstractProviderTestCase
 {
     public static function createProvider(HttpClientInterface $client, string $endpoint): ProviderInterface
     {
-        return new MistralAIProvider($client, $endpoint);
+        return new MistralProvider($client, $endpoint);
     }
 
     public static function toStringProvider(): iterable
@@ -36,7 +36,7 @@ class MistralAIProviderTest extends AbstractProviderTestCase
                 'base_uri' => 'https://api.mistral.ai/api/v1/',
                 'auth_bearer' => 'API_TOKEN',
             ]), 'api.mistral.ai'),
-            'mistralai://api.mistral.ai',
+            'mistral://api.mistral.ai',
         ];
     }
 

@@ -157,7 +157,7 @@ class DsnTest extends TestCase
         ];
 
         yield [
-            '//mistralai',
+            '//mistral',
             'The AI provider DSN must contain a scheme.',
         ];
 

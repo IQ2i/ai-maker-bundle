@@ -11,9 +11,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\AiMakerBundle\Tests\Bridge\MistralAI;
+namespace IQ2i\AiMakerBundle\Tests\Bridge\Mistral;
 
-use IQ2i\AiMakerBundle\Bridge\MistralAI\MistralAIProviderFactory;
+use IQ2i\AiMakerBundle\Bridge\Mistral\MistralProviderFactory;
 use IQ2i\AiMakerBundle\Message\MessageBag;
 use IQ2i\AiMakerBundle\Provider\Dsn;
 use IQ2i\AiMakerBundle\Provider\ProviderFactoryInterface;
@@ -21,24 +21,24 @@ use IQ2i\AiMakerBundle\Test\AbstractProviderFactoryTestCase;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\JsonMockResponse;
 
-class MistralAIProviderFactoryTest extends AbstractProviderFactoryTestCase
+class MistralProviderFactoryTest extends AbstractProviderFactoryTestCase
 {
     public function createFactory(): ProviderFactoryInterface
     {
-        return new MistralAIProviderFactory(new MockHttpClient());
+        return new MistralProviderFactory(new MockHttpClient());
     }
 
     public static function supportsProvider(): iterable
     {
-        yield [true, 'mistralai://API_KEY@default'];
+        yield [true, 'mistral://API_KEY@default'];
         yield [false, 'somethingElse://API_KEY@default'];
     }
 
     public static function createProvider(): iterable
     {
         yield [
-            'mistralai://api.mistral.ai',
-            'mistralai://API_KEY@default',
+            'mistral://api.mistral.ai',
+            'mistral://API_KEY@default',
         ];
     }
 
@@ -49,15 +49,15 @@ class MistralAIProviderFactoryTest extends AbstractProviderFactoryTestCase
 
     public static function incompleteDsnProvider(): iterable
     {
-        yield ['mistralai://default'];
+        yield ['mistral://default'];
     }
 
     public function testBaseUri()
     {
         $response = new JsonMockResponse(['choices' => []]);
         $httpClient = new MockHttpClient([$response]);
-        $factory = new MistralAIProviderFactory($httpClient);
-        $provider = $factory->create(new Dsn('mistralai://API_KEY@default'));
+        $factory = new MistralProviderFactory($httpClient);
+        $provider = $factory->create(new Dsn('mistral://API_KEY@default'));
 
         $messageBag = new MessageBag();
         $messageBag->addUserMessage('Hello, how are you?');

@@ -11,14 +11,14 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace IQ2i\AiMakerBundle\Bridge\MistralAI;
+namespace IQ2i\AiMakerBundle\Bridge\Mistral;
 
 use IQ2i\AiMakerBundle\Exception\UnsupportedSchemeException;
 use IQ2i\AiMakerBundle\Provider\AbstractProviderFactory;
 use IQ2i\AiMakerBundle\Provider\Dsn;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-class MistralAIProviderFactory extends AbstractProviderFactory
+class MistralProviderFactory extends AbstractProviderFactory
 {
     private const string HOST = 'api.mistral.ai';
 
@@ -27,10 +27,10 @@ class MistralAIProviderFactory extends AbstractProviderFactory
     ) {
     }
 
-    public function create(Dsn $dsn): MistralAIProvider
+    public function create(Dsn $dsn): MistralProvider
     {
-        if ('mistralai' !== $dsn->getScheme()) {
-            throw new UnsupportedSchemeException($dsn, 'mistralai', $this->getSupportedSchemes());
+        if ('mistral' !== $dsn->getScheme()) {
+            throw new UnsupportedSchemeException($dsn, 'mistral', $this->getSupportedSchemes());
         }
 
         $endpoint = \preg_replace('/(^|\.)default$/', '\1'.self::HOST, $dsn->getHost());
@@ -45,11 +45,11 @@ class MistralAIProviderFactory extends AbstractProviderFactory
             ],
         ]);
 
-        return new MistralAIProvider($client, $endpoint);
+        return new MistralProvider($client, $endpoint);
     }
 
     protected function getSupportedSchemes(): array
     {
-        return ['mistralai'];
+        return ['mistral'];
     }
 }
