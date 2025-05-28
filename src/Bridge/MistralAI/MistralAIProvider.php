@@ -65,7 +65,7 @@ readonly class MistralAIProvider implements ProviderInterface
 
     public function __toString(): string
     {
-        return \sprintf('mistralai://%s?', $this->endpoint);
+        return \sprintf('mistralai://%s', $this->endpoint);
     }
 
     private function convertChoice(array $choice): Choice
