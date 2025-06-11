@@ -13,8 +13,16 @@ declare(strict_types=1);
 
 namespace IQ2i\AiMakerBundle;
 
+use IQ2i\AiMakerBundle\DependencyInjection\Compiler\ProviderPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AiMakerBundle extends Bundle
 {
+    public function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new ProviderPass());
+    }
 }
