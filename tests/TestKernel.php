@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace IQ2i\AiMakerBundle\Tests;
 
-use IQ2i\AiMakerBundle\AiMakerBundle;
+use IQ2i\AiMakerBundle\IQ2iAiMakerBundle;
 use Symfony\Bundle\FrameworkBundle\FrameworkBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -25,7 +25,7 @@ class TestKernel extends Kernel
     {
         return [
             new FrameworkBundle(),
-            new AiMakerBundle(),
+            new IQ2iAiMakerBundle(),
         ];
     }
 

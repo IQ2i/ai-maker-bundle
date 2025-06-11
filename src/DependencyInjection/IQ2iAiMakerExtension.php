@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AiMakerExtension extends Extension
+class IQ2iAiMakerExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {

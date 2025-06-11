@@ -24,7 +24,7 @@ class ProviderPass implements CompilerPassInterface
         $providers = $container->findTaggedServiceIds('iq2i_ai_maker.provider');
         $provider = \current(\array_keys($providers));
 
-        foreach (array_keys($container->findTaggedServiceIds('maker.command')) as $id) {
+        foreach (\array_keys($container->findTaggedServiceIds('maker.command')) as $id) {
             $container->getDefinition($id)
                 ->setArgument(0, new Reference($provider));
         }

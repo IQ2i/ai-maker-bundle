@@ -13,17 +13,17 @@ declare(strict_types=1);
 
 namespace IQ2i\AiMakerBundle\Tests\DependencyInjection;
 
-use IQ2i\AiMakerBundle\DependencyInjection\AiMakerExtension;
 use IQ2i\AiMakerBundle\DependencyInjection\Compiler\ProviderPass;
+use IQ2i\AiMakerBundle\DependencyInjection\IQ2iAiMakerExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class AiMakerExtensionTest extends TestCase
+class IQ2iAiMakerExtensionTest extends TestCase
 {
     public function testLoad(): void
     {
-        $extension = new AiMakerExtension();
+        $extension = new IQ2iAiMakerExtension();
         $container = new ContainerBuilder();
 
         $extension->load([
@@ -36,7 +36,7 @@ class AiMakerExtensionTest extends TestCase
 
         $this->assertTrue($container->hasDefinition('iq2i_ai_maker.provider.mistral'));
 
-        foreach (array_keys($container->findTaggedServiceIds('maker.command')) as $id) {
+        foreach (\array_keys($container->findTaggedServiceIds('maker.command')) as $id) {
             $arguments = $container->getDefinition($id)->getArguments();
             $this->assertCount(1, $arguments);
 

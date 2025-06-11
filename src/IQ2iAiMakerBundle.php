@@ -17,7 +17,7 @@ use IQ2i\AiMakerBundle\DependencyInjection\Compiler\ProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AiMakerBundle extends Bundle
+class IQ2iAiMakerBundle extends Bundle
 {
     public function build(ContainerBuilder $container): void
     {
